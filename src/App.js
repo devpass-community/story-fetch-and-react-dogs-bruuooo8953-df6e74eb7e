@@ -7,13 +7,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [dogImages, setDogImages] = useState([]);
 
-  useEffect(() => {
-    const getDogs = async () => {
-      const responses = await fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json())
-      const dogs = await responses.message
-      setBreeds(dogs)
-    }
-    getDogs()
+  useEffect(async () => {
+    const responses = await fetch('https://dog.ceo/api/breeds/list/all')
+    const data = await responses.json()
+    const message = data.message
+    setBreeds(message)
   }, []);
 
   const searchByBreed = async () => {
@@ -51,7 +49,7 @@ function App() {
             className="btn btn-primary mx-2"
             disabled={!selectedBreed}
             onClick={searchByBreed}
-            style={{color: "#fff", cursor: "pointer"}}
+            style={{ color: "#fff", cursor: "pointer" }}
           >
             Search
           </button>
