@@ -9,9 +9,8 @@ function App() {
 
   useEffect(() => {
     const getDogs = async () => {
-      const responses = await fetch('https://dog.ceo/api/breeds/list/all')
-      const dogs = responses.message
-      setBreeds(dogs)
+      const responses = await fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json())
+      setBreeds(responses.message)
     }
     getDogs()
   }, []);
