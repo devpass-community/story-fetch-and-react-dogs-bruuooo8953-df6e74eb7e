@@ -10,13 +10,18 @@ function App() {
   useEffect(() => {
     const getDogs = async () => {
       const responses = await fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json())
-      setBreeds(responses.message)
+      const dogs = responses.message
+      setBreeds(dogs)
     }
     getDogs()
   }, []);
 
-  const searchByBreed = () => {
-    // TODO
+  const searchByBreed = async () => {
+    setIsLoading(true)
+    const responses = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/images`).then(response => response.json())
+    const imageDog = responses.message
+    setDogImages(imageDog)
+    setIsLoading(false)
   };
 
   return (
