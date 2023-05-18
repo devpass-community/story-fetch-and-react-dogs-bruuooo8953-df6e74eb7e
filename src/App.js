@@ -7,17 +7,26 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [dogImages, setDogImages] = useState([]);
 
-  useEffect(async () => {
-    const responses = await fetch('https://dog.ceo/api/breeds/list/all')
-    const data = await responses.json()
-    setBreeds(data)
+  useEffect( () => {
+    const getDogs = async () => {
+      const responses = await fetch('https://dog.ceo/api/breeds/list/all')
+      const data = await responses.json()
+      const messages = data.message
+      const breedList = Object.keys(messages);
+      setBreeds(breedList)
+    }
+    getDogs()
+    
   }, []);
 
   const searchByBreed = async () => {
     setIsLoading(true)
-    const responses = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/images`).then(response => response.json())
-    const imageDog = responses.message
-    setDogImages(imageDog)
+    const getImagesDog = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/images`)
+    const data = await getImagesDog.json()
+    const images = data.message
+    setDogImages(images)
+
+
     setIsLoading(false)
   };
 
