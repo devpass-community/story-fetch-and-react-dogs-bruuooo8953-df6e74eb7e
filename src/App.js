@@ -8,7 +8,12 @@ function App() {
   const [dogImages, setDogImages] = useState([]);
 
   useEffect(() => {
-    // TODO
+    const getDogs = async () => {
+      const responses = await fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json())
+      const dogs = responses.message
+      setBreeds(dogs)
+    }
+    getDogs()
   }, []);
 
   const searchByBreed = () => {
