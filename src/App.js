@@ -10,7 +10,7 @@ function App() {
   useEffect(async () => {
     const responses = await fetch('https://dog.ceo/api/breeds/list/all')
     const data = await responses.json()
-    setBreeds(data.message)
+    setBreeds(data)
   }, []);
 
   const searchByBreed = async () => {
