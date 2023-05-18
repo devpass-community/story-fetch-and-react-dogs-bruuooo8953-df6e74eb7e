@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const getDogs = async () => {
       const responses = await fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json())
-      const dogs = responses.message
+      const dogs = await responses.message
       setBreeds(dogs)
     }
     getDogs()
